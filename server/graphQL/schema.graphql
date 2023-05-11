@@ -1,0 +1,142 @@
+scalar DateTime @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time")
+
+enum SegmentTypeEnum {
+  LOCAL
+}
+
+type ContactDetails {
+  address: String
+}
+type Country {
+  code: String
+  name: String
+}
+type City {
+  IATACode: String
+  name: String
+  country: Country
+}
+
+type Origin {
+  IATACode: String
+  name: String
+  city: City
+}
+
+type Destination {
+  IATACode: String
+  name: String
+  city: City
+}
+
+type ArriveOn {
+  IATACode: String
+  name: String
+  city: City
+}
+
+type DepartFrom {
+  IATACode: String
+  name: String
+  city: City
+}
+
+type Carrier {
+  code: String
+  name: String
+}
+
+type Status {
+  code: String
+  name: String
+}
+
+type SellingClass {
+  code: String
+}
+
+type ArrivalTerminal {
+  name: String
+}
+
+type Cabin {
+  code: String
+  name: String
+}
+
+type Equipment {
+  code: String
+  name: String
+}
+
+type OperatingFlight {
+  number: String
+  carrier: Carrier
+  duration: String
+  flown: Boolean
+  checkInStart: DateTime
+  localCheckInStart: DateTime
+  checkInEnd: DateTime
+  localCheckInEnd: DateTime
+  scheduledArrival: DateTime
+  localScheduledArrival: DateTime
+  scheduledDeparture: DateTime
+  localScheduledDeparture: DateTime
+  arrivalTerminal: ArrivalTerminal
+  cabin: Cabin
+  equipment: Equipment
+}
+
+type MarketingFlight {
+  number: String
+  carrier: Carrier
+  status: Status
+  numberOfStops: Int
+  sellingClass: SellingClass
+  operatingFlight: OperatingFlight
+}
+
+type Segments {
+  id: ID
+  type: SegmentTypeEnum
+  informational: Boolean
+  departFrom: DepartFrom
+  arriveOn: ArriveOn
+  marketingFlight: MarketingFlight
+}
+
+type Connections {
+  id: ID
+  duration: String
+  origin: Origin
+  destination: Destination
+  segments: [Segments]
+}
+
+type Title {
+  code: String
+  name: String
+}
+
+type Passengers {
+  id: ID
+  firstName: String
+  lastName: String
+  title: Title
+}
+
+type Itinerary {
+  type: String
+  connections: [Connections]
+}
+
+type BookingData {
+  bookingCode: String
+  contactDetails: [ContactDetails]
+  itinerary: Itinerary
+  passengers: Passengers
+}
+
+type Query {
+  bookingDetails(bookingCode: String!, familyName: String!): BookingData
+}

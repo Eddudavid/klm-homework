@@ -1,0 +1,138 @@
+@import 'src/assets/scss/variables';
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    margin: 20px 0;
+    text-align: center;
+    font-weight: bold;
+    color: $blue;
+    text-transform: uppercase;
+  }
+
+  .line {
+    width: 25px;
+    height: 4px;
+    background-color: $blue;
+    outline: unset;
+    border: unset;
+  }
+
+  .description {
+    margin: 20px 0;
+    text-align: left;
+    color: $blue;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+
+  .booking-not-found {
+    color: $red;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0 10px 0;
+    text-align: center;
+  }
+
+  form {
+    width: 100%;
+
+    .form-input-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 10px;
+
+      .form-label {
+        font-weight: 700;
+        color: $blue;
+        margin-bottom: 5px;
+      }
+
+      .form-input {
+        height: 30px;
+        border: 1px solid $grey-border;
+        line-height: 26px;
+        font-size: 22px;
+        padding: 5px 20px;
+        color: $blue;
+
+        &:focus,
+        &:focus-visible {
+          outline: unset;
+          border: 1px solid $light-blue;
+        }
+      }
+    }
+
+    .submit-button {
+      width: 100%;
+      background-color: $red;
+      color: $white;
+      text-align: center;
+      outline: unset;
+      border: unset;
+      font-weight: 300;
+      height: 50px;
+      font-size: 18px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+
+      &:focus,
+      &:hover {
+        background-color: lighten($red, 10%);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: $grey-border;
+      }
+    }
+  }
+}
+
+@include px_430 {
+  .custom-container {
+    display: flex;
+    justify-content: center;
+  }
+  .form-wrapper {
+    max-width: 380px;
+    margin-top: 50px;
+    border: 1px solid $blue;
+    padding: 25px;
+
+    .title {
+      font-size: 36px;
+      line-height: 52px;
+      margin-bottom: 10px;
+    }
+
+    .line {
+      width: 30px;
+      height: 5px;
+    }
+
+    .description {
+      font-size: 20px;
+      line-height: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .submit-button {
+        width: 50%;
+        margin-top: 20px;
+      }
+    }
+  }
+}

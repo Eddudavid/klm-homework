@@ -1,0 +1,36 @@
+$white: #fff;
+$blue: #003144;
+$light-blue: #355e9a;
+$red: #d20504;
+$black: #000;
+$grey-border: #c2c2c2;
+
+@mixin px_430 {
+  @media screen and (min-width: 430px) {
+    @content;
+  }
+}
+
+@mixin px_576 {
+  @media screen and (min-width: 576px) {
+    @content;
+  }
+}
+
+@mixin px_768 {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin px_960 {
+  @media screen and (min-width: 960px) {
+    @content;
+  }
+}
+
+@mixin px_1200 {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}

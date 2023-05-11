@@ -1,0 +1,157 @@
+<section class="custom-container">
+  <div class="details-wrapper">
+    <h1 class="title">booking details</h1>
+    <hr class="line" />
+    <div class="booking-data-wrapper w-100">
+      <div class="booking-data-row">
+        <div class="name">Booking code</div>
+        <div class="value">{{ bookingDetails.bookingCode }}</div>
+      </div>
+      <div class="booking-data-row">
+        <div class="name">Flight Type</div>
+        <div class="value">{{ bookingDetails.itinerary.type | itineraryType }}</div>
+      </div>
+
+      <div *ngFor="let connection of bookingDetails.itinerary.connections; let i = index">
+        <h4 *ngIf="bookingDetails.itinerary.connections.length > 1">{{ i }} booking</h4>
+        <div class="booking-data-row">
+          <div class="name">From</div>
+          <div class="value">{{ connection.origin.city.name }}, {{ connection.origin.city.country.code }}</div>
+        </div>
+
+        <div class="booking-data-row">
+          <div class="name">To</div>
+          <div class="value">{{ connection.destination.city.name }}, {{ connection.destination.city.country.code }}</div>
+        </div>
+      </div>
+    </div>
+    <mat-accordion class="expansion-panel-wrapper" multi *ngIf="bookingDetails">
+      <mat-expansion-panel *ngIf="bookingDetails.passengers">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Passengers </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="booking-data-wrapper">
+          <div class="booking-data-row">
+            <div class="name">Title</div>
+            <div class="value">{{ bookingDetails.passengers.title.name }}</div>
+          </div>
+          <div class="booking-data-row">
+            <div class="name">First Name</div>
+            <div class="value">{{ bookingDetails.passengers.firstName }}</div>
+          </div>
+          <div class="booking-data-row">
+            <div class="name">Last Name</div>
+            <div class="value">{{ bookingDetails.passengers.lastName }}</div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel *ngIf="bookingDetails.itinerary">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Itinerary </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="booking-data-wrapper">
+          <div class="booking-data-row">
+            <div class="name">Flight Type</div>
+            <div class="value">{{ bookingDetails.itinerary.type | itineraryType }}</div>
+          </div>
+
+          <div *ngFor="let connection of bookingDetails.itinerary.connections; let i = index">
+            <hr />
+            <div class="booking-data-row">
+              <div class="name">From</div>
+              <div class="value">
+                {{ connection.origin.name }} <br />{{ connection.origin.city.name }}, {{ connection.origin.city.country.name }}
+              </div>
+            </div>
+
+            <div class="booking-data-row">
+              <div class="name">To</div>
+              <div class="value">
+                {{ connection.destination.name }} <br />
+                {{ connection.destination.city.name }}, {{ connection.destination.city.country.name }}
+              </div>
+            </div>
+
+            <div class="booking-data-row">
+              <div class="name">Duration</div>
+              <div class="value">{{ connection.duration }} minutes</div>
+            </div>
+            <h4>Segments</h4>
+            <div *ngFor="let segment of connection.segments; let j = index">
+              <hr *ngIf="j > 0" />
+              <div class="booking-data-row">
+                <div class="name">Depart from</div>
+                <div class="value">
+                  {{ segment.departFrom.name }} <br />
+                  {{ segment.departFrom.city.name }}, {{ segment.departFrom.city.country.name }}
+                </div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Arrive to</div>
+                <div class="value">
+                  {{ segment.arriveOn.name }} <br />
+                  {{ segment.arriveOn.city.name }}, {{ segment.arriveOn.city.country.name }}
+                </div>
+              </div>
+              <br />
+              <div class="booking-data-row">
+                <div class="name">Airplane type</div>
+                <div class="value">{{ segment.marketingFlight.operatingFlight.equipment.name }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Flight carrier</div>
+                <div class="value">{{ segment.marketingFlight.carrier.name }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Flight number</div>
+                <div class="value">{{ segment.marketingFlight.number }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Flight status</div>
+                <div class="value">{{ segment.marketingFlight.status.name }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Cabin</div>
+                <div class="value">{{ segment.marketingFlight.operatingFlight.cabin.name }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Stops</div>
+                <div class="value">{{ segment.marketingFlight.numberOfStops }}</div>
+              </div>
+              <br />
+              <div class="booking-data-row">
+                <div class="name">Check in start</div>
+                <div class="value">{{ segment.marketingFlight.operatingFlight.checkInStart | date : 'yyyy. MMM. d. HH:mm' }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Check in end</div>
+                <div class="value">{{ segment.marketingFlight.operatingFlight.checkInEnd | date : 'yyyy. MMM. d. HH:mm' }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Departure</div>
+                <div class="value">{{ segment.marketingFlight.operatingFlight.scheduledDeparture | date : 'yyyy. MMM. d. HH:mm' }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Arrival</div>
+                <div class="value">{{ segment.marketingFlight.operatingFlight.scheduledArrival | date : 'yyyy. MMM. d. HH:mm' }}</div>
+              </div>
+              <div class="booking-data-row">
+                <div class="name">Arriving terminal</div>
+                <div class="value">{{ segment.marketingFlight.operatingFlight.arrivalTerminal.name }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <button class="back-button" (click)="back()">Check another booking</button>
+  </div>
+</section>

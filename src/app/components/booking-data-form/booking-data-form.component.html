@@ -1,0 +1,47 @@
+<section class="custom-container">
+  <div class="form-wrapper">
+    <h1 class="title">
+      Retrieve your <br />
+      booking
+    </h1>
+    <hr class="line" />
+    <p class="description">You can find your booking by filling out your family name and the booking code in your booking confirmation.</p>
+
+    <div *ngIf="error.length" class="booking-not-found">{{ error }}</div>
+
+    <form [formGroup]="detailsForm">
+      <div class="form-input-wrapper">
+        <label class="form-label" for="bookingCode">Booking code</label>
+        <input
+          class="form-input"
+          type="text"
+          id="bookingCode"
+          name="bookingCode"
+          minlength="5"
+          maxlength="6"
+          formControlName="bookingCode"
+          required
+          [pattern]="bookingCodeRegexpPatter"
+          appFormControlErrorMsg
+          validationMsgId="bookingCode"
+        />
+      </div>
+      <div class="form-input-wrapper">
+        <label class="form-label" for="bookingCode">Family name</label>
+        <input
+          class="form-input"
+          type="text"
+          id="familyName"
+          name="familyName"
+          minlength="2"
+          maxlength="30"
+          formControlName="familyName"
+          required
+          appFormControlErrorMsg
+          validationMsgId="familyName"
+        />
+      </div>
+      <button class="submit-button" [disabled]="detailsForm.invalid" (click)="validateData()">Retrieve booking</button>
+    </form>
+  </div>
+</section>

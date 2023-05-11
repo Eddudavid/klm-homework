@@ -1,0 +1,37 @@
+@import 'src/assets/scss/variables';
+
+.header {
+  background: url('/assets/images/af_pattern_bg.png');
+  height: 75px;
+  display: flex;
+  .custom-container {
+    .title {
+      margin: 0;
+      color: $white;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@include px_576 {
+  .header {
+    .custom-container {
+      .title {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@include px_768 {
+  .header {
+    .custom-container {
+      .title {
+        font-size: 28px;
+      }
+    }
+  }
+}
